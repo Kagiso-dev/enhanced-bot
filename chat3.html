@@ -36,9 +36,6 @@
     function launchChat() {
         embeddedservice_bootstrap.utilAPI.launchChat()
             .then(() => {
-                embedded_svc.addEventHandler("afterMaximize", function(data) {
-                    console.log("afterMaximize event was fired.");
-                });
             })
             .catch(() => {
                 // Error handling if chat fails to launch
