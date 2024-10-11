@@ -1,5 +1,6 @@
 <html>
 <script type='text/javascript'>
+	initEmbeddedMessaging();
 	function initEmbeddedMessaging() {
 		try {
 			embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
@@ -16,6 +17,17 @@
 			console.error('Error loading Embedded Messaging: ', err);
 		}
 	};
+
+	if (!window.embedded_svc) {
+		var s = document.createElement('script');
+		s.setAttribute('src', 'https://capeunionmart--dev.sandbox.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.onload = function() {
+			initESW(null);
+		};
+		document.body.appendChild(s);
+	} else {
+		initESW('https://service.force.com');
+	}
 </script>
 <script type='text/javascript' src='https://capeunionmart--dev.sandbox.my.site.com/ESWGihubDeployment1728631807080/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
 
