@@ -26,6 +26,18 @@
 			console.error('Error loading Embedded Messaging: ', err);
 		}
 	};
+
+
+	if (!window.embeddedservice_bootstrap) {
+		var s = document.createElement('script');
+		s.setAttribute('src', 'https://capeunionmart--dev.sandbox.my.site.com/ESWanotherTest1728644120841/assets/js/bootstrap.min.js');
+		s.onload = function() {
+			
+		};
+		document.body.appendChild(s);
+	} else {
+		initESW('https://service.force.com');
+	}
 </script>
 
 
