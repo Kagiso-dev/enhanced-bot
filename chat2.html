@@ -1,0 +1,64 @@
+<html>
+<style type='text/css'>
+	.embeddedServiceHelpButton .helpButton .uiButton {
+		background-color: #005290;
+		font-family: "Arial", sans-serif;
+	}
+	.embeddedServiceHelpButton .helpButton .uiButton:focus {
+		outline: 1px solid #005290;
+	}
+</style>
+
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>	
+<script type='text/javascript'>
+	<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+
+<script type='text/javascript'>
+    function initEmbeddedMessaging() {
+        try {
+            embedded_svc.settings.prechatBackgroundImgURL = 'assets/img/letsTalk.jpg';
+            embeddedservice_bootstrap.settings.language = 'en_US';
+
+            embeddedservice_bootstrap.init(
+                '00DBm000001O3Ub', // Org ID
+                'MessaginWebBot',  // Chat Button ID
+                'https://xxx--dev3.sandbox.my.site.com/ESWMessaginWebBot1724159131779', // Site URL
+                {
+                    scrt2URL: 'https://XXXXX--dev3.sandbox.my.salesforce-scrt.com' // Optional SCRT2 URL
+                }
+            );
+
+            setTimeout(function() {
+                launchChat();
+            }, 8000);
+        } catch (err) {
+            console.error('Error loading Embedded Messaging: ', err);
+        }
+    };
+
+    function launchChat() {
+        embeddedservice_bootstrap.utilAPI.launchChat()
+            .then(() => {
+                embedded_svc.addEventHandler("afterMaximize", function(data) {
+                    console.log("afterMaximize event was fired.");
+                });
+            })
+            .catch(() => {
+                // Error handling if chat fails to launch
+            });
+    }
+
+    window.onload = function() {
+        initEmbeddedMessaging();
+    };
+</script>
+
+<script type='text/javascript' src='https://XXXX--dev3.sandbox.my.site.com/ESWMessaginWebBot1724159131779/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+  window.onload = function() {
+    initEmbeddedMessaging();
+}
+</script>
+<script type='text/javascript' src='https://capeunionmart--dev.sandbox.my.site.com/ESWGihubDeployment1728631807080/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+
+</html>
