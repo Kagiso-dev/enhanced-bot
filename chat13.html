@@ -1,0 +1,67 @@
+<html>
+<head>
+    <script type="text/javascript">
+        // Define the function to initialize Embedded Messaging
+        function initEmbeddedMessaging() {
+            try {
+                console.log('Initializing Embedded Messaging...');
+
+                // Set the settings for the Embedded Messaging
+                embeddedservice_bootstrap.settings.language = 'en_US'; // Set language to English (US)
+                
+                embeddedservice_bootstrap.init(
+                    '00Ddw0000007iNh', // Salesforce Org ID
+                    'Gihub_Deployment', // Deployment Name
+                    'https://capeunionmart--dev.sandbox.my.site.com/ESWGihubDeployment1728631807080', // URL of the DEV environment
+                    {
+                        // Set additional settings if required, e.g., scrt2URL
+                        scrt2URL: 'https://capeunionmart--dev.sandbox.my.salesforce-scrt.com'
+                    }
+                );
+                console.log('Embedded Messaging Initialized');
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        }
+
+        // Ensure that the necessary Salesforce script is loaded
+        function loadEmbeddedService() {
+            if (!window.embedded_svc) {
+                var script = document.createElement('script');
+                script.setAttribute('src', 'https://service.force.com/embeddedservice/5.0/esw.min.js');
+                script.onload = function() {
+                    // Call the init function after the script is loaded
+                    initEmbeddedMessaging();
+                };
+                document.body.appendChild(script);
+            } else {
+                // If the script is already loaded, initialize the messaging
+                initEmbeddedMessaging();
+            }
+        }
+
+        // Ensure that the necessary Bootstrap script is loaded (if required)
+        function loadBootstrapScript() {
+            if (!window.bootstrapLoaded) {
+                var script = document.createElement('script');
+                script.setAttribute('src', 'https://capeunionmart--dev.sandbox.my.site.com/ESWGihubDeployment1728631807080/assets/js/bootstrap.min.js');
+                script.onload = function() {
+                    window.bootstrapLoaded = true;
+                    loadEmbeddedService(); // Load the Embedded Service after Bootstrap is loaded
+                };
+                document.body.appendChild(script);
+            } else {
+                loadEmbeddedService();
+            }
+        }
+
+        // Call this function on page load
+        window.onload = function() {
+            loadBootstrapScript(); // Start by loading the Bootstrap script (if required)
+        };
+    </script>
+</head>
+<body>
+    <!-- Body content -->
+</body>
+</html>
